@@ -1,0 +1,9 @@
+{
+    "concrete": 0,
+    "subway grate": 1,
+    "brick": 2,
+    "dirt": 3,
+    "manhole": 4,
+    "tactile": 5,
+    "cellar door": 6
+}

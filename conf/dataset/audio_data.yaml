@@ -1,0 +1,11 @@
+name: audio_dataset.AudioDataset
+params:
+  sr: 44100
+  step_size: 0.5
+  duration: 1
+  audio_channels: 2
+  audio_n_mels: 64
+  n_fft: 1024
+  hop_length: 256
+  f_mask: 10 # 15% of n_mels = 64
+  t_mask: 25 # 15% of 173

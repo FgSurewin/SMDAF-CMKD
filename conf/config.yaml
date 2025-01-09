@@ -1,0 +1,49 @@
+defaults:
+  - _self_
+  - dataset: audio_data # audio_booster_data, audio_data, original_img_audio_data
+  - model: ast_model # vit_kd_model, resnet_kd_model, image_audio_ast_model
+  - override hydra/job_logging: colorlog
+  - override hydra/hydra_logging: colorlog
+
+data_module:
+  metadata_path: ./data/time_slices_50.csv  # new_time_slices_v1.csv
+  batch_size: 64
+  # k_fold: 2
+  num_workers: 8
+  random_state: 88
+  is_val_from_train: false
+
+train:
+  epochs: 100
+  dev_run: false
+  num_classes: 7
+  needed_labels_file_path: ./needed_labels.json
+  save_checkpoint_to_cloud: true
+  bucket_name: global-wacv-2025
+  creds: ./credentials/nsf-2131186-18936-e9872861c262.json
+  early_stop_config: 
+    monitor: val_MulticlassAccuracy # val_MulticlassAccuracy, val_loss
+    patience: 20
+    mode: max # min, max
+
+
+optimization:
+  # optimizer: torch.optim.SGD
+  # optimizer_config:
+  #   lr: 0.0001 
+  #   momentum: 0.9
+  #   weight_decay: 0.0001
+  optimizer: torch.optim.Adam
+  optimizer_config:
+    lr: 0.0001 
+    weight_decay: 0.00001
+  lr_scheduler: torch.optim.lr_scheduler.ReduceLROnPlateau
+  lr_scheduler_config:
+    patience: 5
+    mode: max # min, max
+  lr_scheduler_monitor_metric: val_MulticlassAccuracy # Optional, only use with ReduceLROnPlateau
+  # val_MulticlassAccuracy, val_loss
+wandb:
+  wandb_project: baseline_models_wacv2025
+  wandb_mode: online # online, disabled
+  log_model: false

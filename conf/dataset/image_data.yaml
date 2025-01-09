@@ -1,0 +1,4 @@
+name: image_dataset.ImageDataset
+params:
+  model_type: "vit" # "resnet", "vit"
+  image_size: 224

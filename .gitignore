@@ -1,0 +1,16 @@
+data/
+__pycache__/
+*.py[cod]
+lightning_logs/
+wandb/
+checkpoints/
+.DS_Store
+.vscode
+train.log
+outputs/
+multirun/
+metrics/
+
+env/
+smp-env/
+credentials/
